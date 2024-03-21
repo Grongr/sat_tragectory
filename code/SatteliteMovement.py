@@ -40,7 +40,6 @@ class TrajectorySolver:
         dxdt[:3] = x[3:]
         dxdt[3:] = -self.mu * x[:3] / l**3 + delta / (l**5) * ((5 * x[2]**2 / l**2 - 1) * x[:3] - 2 * Z)
 
-        # print(dxdt[3:])
         return dxdt
 
     def RK4(self, f, x0):
@@ -58,8 +57,6 @@ class TrajectorySolver:
             k4 = f(t[i-1] + h, x[:, i-1] + h * k3)
 
             x[:, i] = x[:, i-1] + h / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
-
-            # print(x[:, i])
 
         return t, x
 
