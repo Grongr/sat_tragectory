@@ -10,7 +10,7 @@ if __name__ == "__main__":
 
     T = 2 * np.pi * st.r / np.sqrt(st.mu / st.r)
 
-    st.setTimeLimits(0., 24 * 60**2, 10000)
+    st.setTimeLimits(0., 24 * 60**2, 100000)
     st.setStartVelocity(np.sqrt(st.mu / st.r))
     st.setRotMatrixAngles(np.pi / 180 * 97, 0, np.pi / 6)
     # st.setRotMatrixAngles(0, 0, 0)
@@ -32,6 +32,11 @@ if __name__ == "__main__":
     omega = 2 * np.pi / 24 / 60 / 60
     L = np.arctan2(x[1, :], x[0, :]) - omega * t
     B = np.arcsin(x[2, :] / n)
+    
+    for i in range(len(L)):
+
+        if L[i] < -np.pi:
+            L[i] += 2 * np.pi 
 
     plt.scatter(L, B, marker='.')
     plt.show()
